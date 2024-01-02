@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merry Christmas 2013 from Codrops</title>
+    <meta name="description" content="Merry Christmas 2013 from Codrops" />
+    <meta name="keywords" content="bursting gift box, merry christmas, svg icons, css animation" />
+    <meta name="author" content="Codrops" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!--[if IE]>
+          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>2024 MSG :)</title>
+</head>
+
+<body>
+
+
+    <div class="loader" hidden>
+        <div class="square"></div>
+        <div class="path">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <p class="text-load">Compiling</p>
+    </div>
+
+    <div class="container">
+        <!-- Top Navigation -->
+        <div class="content-wr">
+            <p>In This New Chapter, Write Your Heart Out for Those Who Hold a Special Place!</p>
+        </div>
+        <canvas id="snowfall"></canvas>
+        <!-- <textarea name="s" id="" cols="30" rows="20"></textarea> -->
+        <div class="paper" >
+            <div class="paper-content">
+                <textarea autofocus
+                    placeholder="Type your awesome message here. Hit 'Create Gift' for your magic link. Copy it and share the love! (Don't worry, it's not a prank... probably!)"></textarea>
+            </div>
+        </div>
+
+        <div class="social-share-body" style="display:none;">
+            <div class="social-share-box">
+                <a id="twitter-share" style="text-align: center; text-decoration: none;" target="_blank">
+                    <i class="fa fa-3x fa-twitter mx-5" aria-hidden="true" style="color: #1DA1F2;" name="tweet-it"></i>
+                    <p for="tweet-it">Twitter</p>
+                </a>
+            </div>
+            <div class="social-share-box">
+                <a id="whatsapp-share" style="text-align: center; text-decoration: none;" target="_blank">
+                    <i class="fa fa-3x fa-whatsapp mx-5" aria-hidden="true" style="color: #25D366;"
+                        name="whatsapp-it"></i>
+                    <p for="whatsapp-it">WhatsApp</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="cont-link-area" style="display: none;">
+            <div class="cont-link"></div>
+            <div class="link-copy">
+                <i class="fa fa-clone fa-2x" aria-hidden="true" title="copy link" onclick="copyToClipboard();"></i>
+            </div>
+        </div>
+
+        <a href="/" class="link-view" style="text-decoration: none; color:white; margin:10px 0px; z-index: 200000; display: none;" target="_blank"> view <i class="fa fa-external-link" aria-hidden="true"></i></a>
+
+        <button class="button-89" role="button" >Create <i class="fa fa-gift fa-2x"
+                style="margin-left: 5px; cursor: pointer;" aria-hidden="true"></i>
+        </button>
+
+
+
+    </div>
+
+    <div class="footer">
+		<p>Made with <i class="fa fa-heart" aria-hidden="true"></i>
+            and a sprinkle of snow. Share love, one link at a time. Stuck in the letterbox? Reach out to the snow guru: <a href="https://www.instagram.com/00__surya/"><i class="fa fa-instagram" aria-hidden="true"></i> <i class="fa fa-hand-o-left" aria-hidden="true"></i> here ...
+            </a>
+            </p>
+	</div>
+
+    <script>
+        var snow = {
+            /**
+             * float  The current x position
+             */
+            x: 0,
+
+            /**
+             * float  The current y position
+             */
+            y: 0,
+
+            /**
+             * float  Alpha
+             */
+            alpha: 0.5,
+
+            /**
+             * float  The radius of the circle.
+             */
+            radius: 3,
+
+            /**
+             * Velocity for the particle.
+             */
+            velocity: {
+                x: 0,
+                y: 5
+            },
+
+            /**
+             * Draws the particle onto the canvas in context.
+             *
+             * @param	c	 The canvas context to draw onto
+             */
+            draw: function (c) {
+                c.fillStyle = 'rgba(255,255,255,' + this.alpha + ')';
+                c.beginPath();
+                c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+                c.fill();
+            },
+
+            /**
+             * Updates the particle.
+             */
+            update: function () {
+                this.x += this.velocity.x
+                this.y += this.velocity.y;
+
+
+            },
+
+            /**
+             * Randomizes the settings for the particle
+             *
+             * @param	zone	The blastZone
+             */
+            randomize: function (zone) {
+                // Get a random point inside the blastzone and set the x/y
+                var s = this.getLocation(zone);
+                this.x = s.x;
+                this.y = s.y;
+
+                this.alpha = this.randomRange(0.3, 1);
+                this.radius = this.randomRange(1, 5);
+
+                this.velocity = {
+                    x: this.randomRange(-0.35, 0.35),
+                    y: this.randomRange(0.75, 1.5)
+                }
+            },
+
+            /**
+             * Adds a random drift type motion to the particle.
+             * Taken from the Flint particle system....
+             */
+            action: function () {
+                this.velocity.x += (Math.random() - 0.5) * 0.1;
+            },
+
+            /**
+             * Take a low and high number and gets a random number between them.
+             *
+             * @param	low		The low number
+             * @param	high	The high number
+             * @return	Number
+             */
+            randomRange: function (low, high) {
+                return (Math.random() * (high - low)) + low;
+            },
+
+            /**
+             * Gets a random starting point for the particle.
+             * Taken from the Flint particle system in AS3
+             *
+             * @param	zone	The zone to get a location from
+             * @return	Object
+             */
+            getLocation: function (z) {
+                var p = {};
+                p.x = z.x + Math.random() * z.width;
+                p.y = z.y + Math.random() * z.height;
+                return p;
+            }
+        };
+
+        var rectangleEmitter = {
+            /**
+             * The canvas object
+             */
+            canvas: null,
+
+            /**
+             * CanvasContext  The canvas context object
+             */
+            context: null,
+
+            /**
+             * Object The blast zone for particles.
+             */
+            blastZone: {
+                x: 0,
+                y: 0,
+                width: 800,
+                height: 600
+            },
+
+            /**
+             * Particle The type of particle to create.
+             */
+            particle: null,
+
+            /**
+             * array The list of particles in the emitter.
+             */
+            particles: [],
+
+            /**
+             * The max number of particles.
+             */
+            maxParticles: 700,
+
+            /**
+             * The intervalID for the FPS interval
+             */
+            fpsId: null,
+
+            /**
+             * The interval ID for the seconds tick.
+             */
+            tickId: null,
+
+            /**
+             * Sets the canvas object.
+             *
+             * @param canvas DOMCanvasElement  The canvas to draw on.
+             */
+            setCanvas: function (canvas) {
+                this.canvas = canvas;
+                this.context = canvas.getContext('2d');
+            },
+
+            /**
+             * Sets the blast zone.
+             *
+             * @param x      int  The x coord
+             * @param y      int  The y-coor
+             * @param width  int  The width
+             * @param height int  The height
+             */
+            setBlastZone: function (x, y, width, height) {
+                this.blastZone = {
+                    'x': x,
+                    'y': y,
+                    'width': width,
+                    'height': height
+                };
+            },
+
+            /** Starts the emitter.
+             *
+             * @param	fps	The frame rate or 30 by default
+             */
+            start: function (fps) {
+                var rate = fps || 30;
+                this.fpsId = setInterval(this.frameUpdate, 1000 / rate, this); // Framerate update
+                this.tickId = setInterval(this.tick, 1000, this); // Every second tick...
+            },
+
+            /**
+             * Pauses the emitter but doesn't clear the screen.
+             */
+            pause: function () {
+                clearInterval(this.intervalId);
+            },
+
+            /**
+             * Stops the emitter and clears the screen.
+             */
+            stop: function () {
+                clearInterval(this.intervalId);
+                this.clear();
+            },
+
+            /**
+             * Clears off the particles.
+             */
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            },
+
+            /**
+             * Adds a particle to the screen.
+             *
+             * @param	particle	The particle to add
+             */
+            addParticle: function (particle) {
+                if (this.particles.length < this.maxParticles) {
+                    var p = Object.create(particle);
+                    p.randomize(this.blastZone);
+
+                    // Add the particle
+                    this.particles.push(p);
+                }
+            },
+
+            /**
+             * Draws the whole canvas.
+             */
+            draw: function () {
+                this.clear();
+
+                var i = this.particles.length;
+                while (i--) {
+                    this.particles[i].draw(this.context);
+                }
+            },
+
+            /**
+             * Updates the particles on the screen.
+             */
+            update: function () {
+                var p;
+                var i = this.particles.length;
+
+                while (i--) {
+                    p = this.particles[i];
+                    p.update();
+
+                    // Remove the particle if it is "dead"
+                    if (p.y > this.canvas.height) {
+                        this.particles.splice(i, 1);
+                    }
+                }
+            },
+
+            /**
+             * Applies actions to all of the particles.
+             */
+            applyActions: function () {
+                var i = this.particles.length;
+
+                while (i--) {
+                    this.particles[i].action();
+                }
+            },
+
+            /**
+             * Run the action ahead the number of seconds (so the screen isn't blank on init).
+             *
+             * @param seconds int  The number of seconds to run ahead.
+             */
+            runAhead: function (seconds) {
+                for (i = 0; i < seconds; i += 1) {
+                    this.frameUpdate(this);
+                }
+            },
+
+            /**
+             * The FPS update
+             *
+             * @param	self	The reference to the emitter that is lost during setInterval.
+             */
+            frameUpdate: function (self) {
+                self.addParticle(self.particle);
+                self.update();
+                self.draw();
+            },
+
+            /**
+             * The seconds "tick" interval
+             *
+             * @param	self	The reference to the emitter that is lost during setInterval.
+             */
+            tick: function (self) {
+                self.applyActions();
+            }
+
+        };
+
+        var canvas = document.getElementById("snowfall");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // Now the emitter
+        var emitter = Object.create(rectangleEmitter);
+        emitter.setCanvas(canvas);
+        emitter.setBlastZone(0, -10, canvas.width, 1);
+        emitter.particle = snow;
+        emitter.runAhead(0);
+        emitter.start(60);
+
+        var gftBtn = document.querySelector('.button-89');
+        var contentHeadText = document.querySelector('.content-wr p');
+        var contentLinkArea = document.querySelector('.cont-link-area');
+
+        var holdText;
+
+        // making soical share workable
+        var twitter_share = document.querySelector('#twitter-share');
+        var whatsapp_share = document.querySelector('#whatsapp-share');
+
+        gftBtn.addEventListener('click', () => {
+            var paperMain = document.querySelector('.paper');
+            var paperText = paperMain.querySelector('textarea').value
+            if (paperText) {
+
+                paperMain.style.display = 'none';
+                gftBtn.style.display = 'none';
+
+                var divElement = document.querySelector('.social-share-body');
+                divElement.removeAttribute('hidden');
+
+                var encodedMsg = encodeURIComponent(paperText);
+
+                // Call the function to create the shortened URL
+                var msgUrl = `${window.location.href}${encodedMsg}`
+                console.log(msgUrl);
+
+                document.querySelector('.loader').removeAttribute('hidden');
+                const newMsgUrl = createShortenedURL(msgUrl)
+                    .then(data => {
+                        if (data) {
+
+                            var tinyUrl = data.data.tiny_url
+                            contentHeadText.innerText = "Copy the link and share it! Don't make it loss";
+                            contentLinkArea.querySelector('.cont-link').innerText = tinyUrl;
+                            contentLinkArea.style.display = 'flex';
+
+                            document.querySelector('.link-view').style.display = 'block';
+                            document.querySelector('.link-view').href = tinyUrl;
+
+                            var divElement = document.querySelector('.social-share-body');
+                            divElement.style.display = 'flex';
+
+                            console.log(msgUrl);
+
+                            var share_msg = `Your special message from a loved one has just arrived. Tap here to open: ${tinyUrl}`
+                            var t_href = `https://twitter.com/intent/tweet?text=${share_msg}`;
+                            var w_href = `https://api.whatsapp.com/send?text=${share_msg}`;
+
+                            twitter_share.setAttribute('href', t_href);
+                            whatsapp_share.setAttribute('href', w_href);
+                            twitter_share.style.color = 'white';
+                            whatsapp_share.style.color = 'white';
+                            document.querySelector('.loader').setAttribute('hidden', 'true');
+
+
+                        } else {
+                            console.log('Failed to create shortened URL');
+                            document.querySelector('.loader').setAttribute('hidden', 'true');
+
+                        }
+                    })
+                    .catch(error => {
+                        document.querySelector('.loader').setAttribute('hidden', 'true');
+
+                    });
+
+
+            }
+            console.log(paperText);
+
+        })
+
+
+        function copyToClipboard() {
+
+            const tempArea = document.createElement("textarea");
+            tempArea.value = contentLinkArea.querySelector('.cont-link').innerText;
+
+            // Append the textarea to the document
+            document.body.appendChild(tempArea);
+
+            // Select the text in the textarea
+            tempArea.select();
+            tempArea.setSelectionRange(0, contentLinkArea.querySelector('.cont-link').innerText.length); // For iOS
+
+            // Copy the selected text
+            document.execCommand("copy");
+
+            // Remove the textarea as it's no longer needed
+            document.body.removeChild(tempArea);
+
+            // visual feedback to the user
+
+            if (!holdText) {
+                holdText = contentLinkArea.querySelector('.cont-link').innerText;
+            }
+
+            contentLinkArea.querySelector('.cont-link').innerText = 'Copied!';
+            contentLinkArea.querySelector('.cont-link').style.color = 'green'
+            setTimeout(() => {
+                contentLinkArea.querySelector('.cont-link').innerText = holdText;
+                contentLinkArea.querySelector('.cont-link').style.color = 'black'
+            }, 500);
+
+
+
+        }
+
+
+
+        function generateUniquePrefix() {
+            const timestamp = Date.now().toString(); // Get current timestamp as string
+            return timestamp;
+        }
+
+        function generateUniquePhrase() {
+            const corePhrase = "UnwrapYourMessage";
+            const uniquePrefix = generateUniquePrefix();
+            return uniquePrefix + "-" + corePhrase; // Adding a separator for readability
+        }
+
+
+
+
+        const TOKEN = 'K5yWc7H6ONCL8W9zQc382B1evcvsbHScEkRVRCPx0ps9Yxa7cqfPfX5EZHjm';
+
+        async function createShortenedURL(longURL) {
+            const apiUrl = `https://api.tinyurl.com/create?api_token=${TOKEN}`;
+
+            var requestData;
+            try {
+                requestData = {
+                    url: longURL,
+                    domain: 'tinyurl.com',
+                };
+            }
+            catch {
+                requestData = {
+                    url: longURL,
+                    domain: 'tinyurl.com'
+                };
+            }
+
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'accept': 'application/json',
+                        'Authorization': `Bearer ${TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to create shortened URL');
+                }
+
+                const responseData = await response.json();
+                return responseData;
+
+            } catch (error) {
+                return null;
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>
+</body>
+
+</html>
