@@ -9,4 +9,4 @@ app.add_url_rule('/', view_func=index.home, methods=['GET'])
 app.add_url_rule('/<string:msg>', view_func=index.render_msg, methods=['GET'])
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=False)
