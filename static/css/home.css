@@ -67,10 +67,13 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    
 }
 .content-wr p{
     font-size: 30px;
     font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    text-align: center;
 }
 
 .container {
