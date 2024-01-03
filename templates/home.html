@@ -9,17 +9,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wrap, Click, Share! (:</title>
+    
     <meta name="description" content="Wrap your heartfelt letters for your loved ones in just a few clicks! Share your sentiments in a whole new way with postiepilot. Surprise and delight with personalized messages today!" />
     <meta name="keywords" content="bursting gift box, merry christmas, new year, message animation, letterbox, digital writing" />
+    <meta property="og:image" content="https://00surya.pythonanywhere.com/static/image/og-image.jpg">
+	<meta property="og:url" content="https://00surya.pythonanywhere.com/">
+	<meta property="og:type" content="website">
     <meta name="author" content="hellome" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-    <!--[if IE]>
-          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>2024 MSG :)</title>
 </head>
 
 <body>
@@ -78,7 +76,7 @@
 
         <a href="/" class="link-view" style="text-decoration: none; color:white; margin:10px 0px; z-index: 200000; display: none;" target="_blank"> view <i class="fa fa-external-link" aria-hidden="true"></i></a>
 
-        <button class="button-89" role="button" >Create <i class="fa fa-gift fa-2x"
+        <button class="button-89" role="button" >Wrap <i class="fa fa-gift fa-2x"
                 style="margin-left: 5px; cursor: pointer;" aria-hidden="true"></i>
         </button>
 
@@ -429,7 +427,6 @@
 
                 // Call the function to create the shortened URL
                 var msgUrl = `${window.location.href}${encodedMsg}`
-                console.log(msgUrl);
 
                 document.querySelector('.loader').removeAttribute('hidden');
                 const newMsgUrl = createShortenedURL(msgUrl)
@@ -437,7 +434,7 @@
                         if (data) {
 
                             var tinyUrl = data.data.tiny_url
-                            contentHeadText.innerText = "Copy the link and share it! Don't make it loss";
+                            contentHeadText.innerText = "Share it your way, no judgment! :)";
                             contentLinkArea.querySelector('.cont-link').innerText = tinyUrl;
                             contentLinkArea.style.display = 'flex';
 
@@ -449,7 +446,7 @@
 
                             console.log(msgUrl);
 
-                            var share_msg = `Your special message from a loved one has just arrived. Tap here to open: ${tinyUrl}`
+                            var share_msg = `Psst, a message for you! Don't leave it stuck in the letterbox. Open it now: ${tinyUrl}`
                             var t_href = `https://twitter.com/intent/tweet?text=${share_msg}`;
                             var w_href = `https://api.whatsapp.com/send?text=${share_msg}`;
 

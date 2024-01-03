@@ -1,5 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
 
 html, body, .container {
 	height: 100%;
@@ -15,7 +17,6 @@ html, body, .container {
 }
 
 body {
-	background: #e74c3c url(../img/winterforest.png) repeat-x bottom center;
 	overflow: hidden;
 }
 
@@ -86,10 +87,10 @@ h1 span {
 
 .giftbox::after {
 	/* border: 2px solid black; */
-	content: "Tap to Reveal";
+	content: "Tap to Unwrap";
 	position: absolute;
 	color: #fff;
-	font-family: cursive;
+	font-family: 'Ubuntu', sans-serif;
 	bottom: 0;
 	left: 0;
 	width: 100%;
@@ -100,7 +101,21 @@ h1 span {
 	transform: rotate(-20deg);
 	-webkit-transform-origin: 0 0;
 	transform-origin: 0 0;
+	animation: zoom-in-zoom-out 3s ease-in-out infinite;
 }
+
+@keyframes zoom-in-zoom-out {
+	0% {
+		transform: rotate(-20deg) scale(1, 1);
+	}
+	50% {
+		transform: rotate(-20deg) scale(1.05, 1.05);
+	}
+	100% {
+		transform: rotate(-20deg) scale(1, 1);
+	}
+}
+
 
 .giftbox > div {
 	border-radius: 10%;
@@ -210,19 +225,21 @@ h1 span {
 }
 
 .icons span.letter {
-	font-family: 'Hedvig Letters Serif', serif;
+	font-family: 'Caveat', cursive;
 	overflow-y: scroll;
 	font-weight: 400;
 	height: 80%;
 	word-spacing: 4px;
     word-wrap: break-word;
-	text-align: justify;
+	text-align: inherit;
     width: 100%;
-	color: #fdc56d;
-    font-size: 1.2rem;
+	color: black !important;
+	font-weight: 600;
+    font-size: 1.5rem;
     position: absolute;
     top: 10%;
     left: 0;
+	padding: 40px 10px;
 }
 
 .icons svg path,
@@ -1131,7 +1148,6 @@ h1 span {
 .step-4 .icons span.letter {
 	/* color: #2c3e50; */
 	color: white;
-	text-shadow: 2px 2px 0 #ca3121;
 }
 
 .background {
@@ -1200,10 +1216,7 @@ h1 span {
 		/* font-size: 44px; */
 		word-spacing: 0.1px;
 	}
-	.step-3 .icons span.letter, 
-	.step-4 .icons span.letter {
-		text-shadow: 2px 2px 0 #ca3121;
-	}
+
 }
 
 @media screen and (max-width: 44em) {
@@ -1213,10 +1226,6 @@ h1 span {
 		word-spacing: 0.1px;
 	}
 
-	.step-3 .icons span.letter, 
-	.step-4 .icons span.letter {
-		text-shadow: 1px 1px 0 #ca3121;
-	}
 
 	.icons svg path,
 	.icons svg polygon,
@@ -1224,6 +1233,4 @@ h1 span {
 		stroke-width: 3;
 	}
 }
-
-
 

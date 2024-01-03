@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 article,
 aside,
 details,
@@ -70,22 +72,80 @@ dfn {
 
 .footer {
 
-    display: flex;
-    justify-content: center;
+    display: none;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     font-size: 0.9rem;
     color: black;
     font-weight: 500;
-    font-family: cursive;
+    font-family: 'Ubuntu', sans-serif;
     position: absolute;
     bottom: 0;
     padding: 0 10px;
+    /* border: 2px solid black; */
   }
 
   .footer a {
     text-decoration: none;
     color: black;
+  }
+
+  .footer p {
+    width: 80%;
+  }
+
+.dn-btn {
+    cursor: pointer;   
+    animation: dn-btn-animation 3s ease-in-out infinite;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.pl-ps {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    color: rgb(67, 67, 67);
+    animation: flicker 3s ease-in-out 10;
+    cursor: pointer;
+    display: none;
+}
+
+.hide {
+    display: none !important;
+}
+
+@keyframes flicker {
+    0%, 100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    50% {
+      opacity: 0.7;
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+}
+  
+  
+  
+  
+@keyframes dn-btn-animation {
+	0% {
+	  transform: scale(1, 1);
+	}
+	50% {
+	  transform: scale(1.1, 1.1);
+	}
+	100% {
+	  transform: scale(1, 1);
+	}
   }
 
 hr {

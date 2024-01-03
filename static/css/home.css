@@ -1,7 +1,5 @@
-
-@import url(https://fonts.googleapis.com/css?family=Roboto);
-@import url(https://fonts.googleapis.com/css?family=Handlee);
-
+@import url('https://fonts.googleapis.com/css?family=Handlee');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 .paper {
     position: relative;
@@ -63,7 +61,6 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    /* border: 2px solid black; */
 }
 .content-wr {
     display: flex;
@@ -73,11 +70,11 @@ body {
 }
 .content-wr p{
     font-size: 30px;
-    font-family: cursive;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .container {
-
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,7 +108,7 @@ body {
   touch-action: manipulation;
   padding: 20px;
   font-size: 20px;
-  font-family: cursive;
+  font-family: 'Ubuntu', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,6 +135,7 @@ body {
     padding: 20px 30px;
     font-size: 24px;
     font-weight: bold;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .cont-link {
@@ -172,6 +170,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 0 10px;
+    font-family: 'Ubuntu', sans-serif;
 }
 .social-share-box a{
     padding: 10px;
@@ -261,9 +260,13 @@ body {
     font-family: cursive;
     position: relative;
     bottom: 0;
+    font-family: 'Ubuntu', sans-serif;
   }
 
   .footer a {
     text-decoration: none;
     color: black;
   }
+
+
+

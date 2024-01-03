@@ -22,6 +22,12 @@
 
 	function runAnimation() {
 		document.getElementById("ch-audio").play();
+		document.querySelector('.dn-btn').style.display = 'flex';
+		document.querySelector('.dn-btn').style.flexDirection = 'column';
+		document.querySelector('.dn-btn').style.alignItems = 'flex-end';
+		document.querySelector('.footer').style.display = 'flex';
+		document.querySelector('.pl-ps').style.display = 'block';
+
 		if( step === 1 ) {
 			box.removeEventListener( 'click', runAnimation );
 		}
