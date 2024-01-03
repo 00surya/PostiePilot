@@ -3,9 +3,9 @@
 
 .paper {
     position: relative;
-    width: 90%;
+    width: 80%;
     max-width: 800px;
-    min-width: 400px;
+    min-width: 380px;
     height: 400px;
     margin: 0 auto;
     background: #fafafa;
