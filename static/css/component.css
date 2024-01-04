@@ -86,23 +86,21 @@ h1 span {
 }
 
 .giftbox::after {
-	/* border: 2px solid black; */
-	content: "Tap to Unwrap";
+	content: "";
 	position: absolute;
-	color: #fff;
-	font-family: 'Ubuntu', sans-serif;
 	bottom: 0;
 	left: 0;
+	top: 20px;
 	width: 100%;
-	text-align: center;
-	font-size: 24px;
-	z-index: 1000;
-	-webkit-transform: rotate(-20deg);
-	transform: rotate(-20deg);
-	-webkit-transform-origin: 0 0;
-	transform-origin: 0 0;
-	animation: zoom-in-zoom-out 3s ease-in-out infinite;
-}
+	height: 100%;
+	background: url('/static/image/tap.png') no-repeat center;
+	-webkit-transform: rotate(-90deg) scale(1.5); /* Rotate and scale */
+	transform: rotate(-90deg) scale(1.5); /* Rotate and scale */
+	animation: zoom-in-zoom-out 1.5s ease-in-out infinite;
+	z-index: 10000;
+	background-size: 80px;
+  }
+
 
 @keyframes zoom-in-zoom-out {
 	0% {
